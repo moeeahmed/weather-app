@@ -1,0 +1,24 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Creating weather app using nodejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moeeahmed/weather-app.git"
+  },
+  "author": "Mohammed Ahamed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moeeahmed/weather-app/issues"
+  },
+  "homepage": "https://github.com/moeeahmed/weather-app#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "ip": "^1.1.8",
+    "nodemon": "^2.0.19"
+  }
+}
