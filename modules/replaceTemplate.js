@@ -1,4 +1,10 @@
-module.exports = (temp, data) => {
+const fs = require('fs');
+const weatherCard = fs.readFileSync(
+  `${__dirname}/../templates/weatherCard.html`,
+  'utf-8'
+);
+
+module.exports = (data) => {
   const direction = {
     N: '↑',
     NE: '↗',
@@ -11,7 +17,7 @@ module.exports = (temp, data) => {
     undefined: '',
   };
 
-  let output = temp.replace(/%COUNTRY_NAME%/g, data.location.country);
+  let output = weatherCard.replace(/%COUNTRY_NAME%/g, data.location.country);
   output = output.replace(/%CITY_NAME%/g, data.location.name);
   output = output.replace(/%CONDITION%/g, data.current.condition.text);
   output = output.replace(/%WIND_SPEED%/g, data.current.wind_mph);

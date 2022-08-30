@@ -43,6 +43,10 @@
             text-align: center;
         }
 
+        .hide {
+            display: none;
+        }
+
         h1,
         h2,
         h3,
@@ -232,9 +236,10 @@
             </div>
             <h1>%TEMPERATURE%<span class="unit">&#8451</span></h1>
         </div>
-
-        <form class="form" action="/location" method="get">
-            <input id="team_name" type="text" name="/" placeholder="Enter location 🔍">
+        <div class="error_msg hide">
+        </div>
+        <form class="form" action="/" method="get">
+            <input class="location_input" name="location" type="text" placeholder="Enter location 🔍">
         </form>
     </div>
 </body>
