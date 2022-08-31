@@ -4,7 +4,7 @@ const weatherCard = fs.readFileSync(
   'utf-8'
 );
 
-module.exports = (data) => {
+module.exports = (data, error = false) => {
   const direction = {
     N: '↑',
     NE: '↗',
@@ -16,6 +16,12 @@ module.exports = (data) => {
     NW: '↖',
     undefined: '',
   };
+
+  // if (error) {
+  //   let output = errorCard.replace(/%ERROR_MESSAGE%/g, data);
+  //   output = output.replace(/hide/g, '');
+  //   return output;
+  // }
 
   let output = weatherCard.replace(/%COUNTRY_NAME%/g, data.location.country);
   output = output.replace(/%CITY_NAME%/g, data.location.name);
