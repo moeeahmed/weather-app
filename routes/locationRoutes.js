@@ -17,6 +17,8 @@ router
   .route('/location/:loc')
   .get(locationController.checkURL, locationController.getSearch);
 
+router.route('/forecast').get(locationController.getForecast);
+
 //Unrecognised URL
 router.route('*').get(locationController.redirect);
 module.exports = router;

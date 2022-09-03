@@ -10,8 +10,17 @@ body {
   height: 100vh;
 }
 
-.card {
+.cards {
+  display: flex;
+  flex-direction: row;
   margin: 0 auto;
+  justify-content: center;
+  padding: 50px;
+  overflow-x: scroll;
+}
+
+.card {
+  margin-inline: 10px;
   padding: 5px 30px;
   width: 290px;
   height: 376px;
@@ -33,6 +42,36 @@ body {
 
 .hide {
   display: none;
+}
+
+.max_min {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.hourly {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.hourly_card {
+  padding: 3px;
+  height: 100px;
+  width: 75px;
+  margin-inline: 5px;
+  text-align: center;
+}
+
+.hourly_card p {
+  color: white;
+  margin: 0;
+  font-weight: 600;
+}
+
+.hourly_card img {
+  height: 50px;
 }
 
 h1,
@@ -117,7 +156,7 @@ span span {
 }
 
 .info {
-  margin-block: 30px;
+  margin-block: 20px 30px;
   flex-direction: column;
   text-align: center;
   display: flex;
@@ -156,6 +195,17 @@ span span {
 
 ::placeholder {
   text-align: center;
+}
+
+.forecast_icon {
+  font-size: 25px;
+  color: white;
+  text-align: right;
+}
+
+.forecast_icon i:hover {
+  color: rgb(134, 134, 134) 35%;
+  transform: scale(1.1);
 }
 
 @-webkit-keyframes gradient {
@@ -201,4 +251,8 @@ span span {
   100% {
     opacity: 1;
   }
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

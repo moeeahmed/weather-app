@@ -1,10 +1,15 @@
 'use strict';
 
+//Weather Card
 const inputField = document.querySelector('.location_input');
 const errorMsg = document.querySelector('.error_msg');
 const form = document.querySelector('.form');
 
-form.addEventListener('submit', function (e) {
+//Forecast Card
+const info = document.querySelectorAll('.info');
+const forecastCards = document.querySelectorAll('.card');
+
+form?.addEventListener('submit', function (e) {
   e.preventDefault();
   const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~¬]/;
 
@@ -19,11 +24,25 @@ form.addEventListener('submit', function (e) {
   }
 });
 
-// console.log('Test DATA');
+//Forecast Cards
+info.forEach((el, ind) => {
+  if (ind === 0) {
+    el.children[0].textContent = 'Today';
+  } else if (ind === 1) {
+    el.children[0].textContent = 'Tomorrow';
+  } else {
+    el.children[0].textContent = Intl.DateTimeFormat('en-GB', {
+      weekday: 'long',
+    }).format(new Date(el.children[0].textContent));
+  }
+});
 
-// (async function () {
-//   const url = 'http://127.0.0.1:1234/fhusdilhfdskjhflo';
-//   const mo = await fetch(url);
-//   const moj = await mo.json();
-//   console.log(moj);
-// })();
+forecastCards[1].style.transform = 'scale(0.9)';
+forecastCards[2].style.transform = 'scale(0.9)';
+
+document.addEventListener('click', function (e) {
+  if (e.target.closest('.card')) {
+    forecastCards.forEach((el) => (el.style.transform = 'scale(0.9)'));
+    e.target.closest('.card').style.transform = 'scale(1)';
+  }
+});

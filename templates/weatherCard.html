@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="/styles.css" />
     <link href="https://fonts.googleapis.com/css?family=Megrim|Nunito+Sans:400,900" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/f5a3f181f4.js" crossorigin="anonymous"></script>
 
     <script src="/main.js" defer></script>
 
@@ -14,11 +15,15 @@
 </head>
 
 <body>
+
     <div class="location">
         <h2>%COUNTRY_NAME%</h2>
         <h4>%CITY_NAME%</h4>
     </div>
-    <div class="card">
+    <div class="card" style="margin: 0 auto">
+        <div class="forecast_icon">
+            <a href="/forecast"><i class="fa-regular fa-calendar-days"></i></a>
+        </div>
         <div class="info">
             <h3>%CONDITION%</h3>
             <h3>Wind: <span>%WIND_SPEED% mph %WIND_DIR%</span></h3>

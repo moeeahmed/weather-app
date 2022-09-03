@@ -1,5 +1,6 @@
 const http = require('https');
-const replaceTemplate = require('../modules/replaceTemplate');
+const replaceWeatherCard = require('../modules/replaceWeatherCard');
+const replaceForecast = require('../modules/replaceForecast');
 const dotenv = require('dotenv').config({ path: './config.env' });
 
 //Check URL and create req param for location
@@ -35,7 +36,8 @@ exports.getDefault = (_, res) => {
       });
       resp.on('end', function () {
         const body = Buffer.concat(chunks);
-        res.end(replaceTemplate(JSON.parse(body.toString())));
+        const response = JSON.parse(body.toString());
+        res.end(replaceWeatherCard(response));
       });
     })
     .end();
@@ -70,8 +72,39 @@ exports.getSearch = (req, res) => {
             response: response.error.message,
           });
         } else {
-          res.end(replaceTemplate(response));
+          res.end(replaceWeatherCard(response));
         }
+      });
+    })
+    .end();
+};
+
+//get 3 day forecast
+exports.getForecast = (req, res) => {
+  const options = {
+    method: 'GET',
+    hostname: 'weatherapi-com.p.rapidapi.com',
+    port: null,
+    path: '/forecast.json?q=London&days=3',
+    headers: {
+      'X-RapidAPI-Key': '6d82f956bamsh079341077b9577ep15f139jsnb77afa8ba2cf',
+      'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
+      useQueryString: true,
+    },
+  };
+
+  http
+    .request(options, function (resp) {
+      const chunks = [];
+
+      resp.on('data', function (chunk) {
+        chunks.push(chunk);
+      });
+
+      resp.on('end', function () {
+        const body = Buffer.concat(chunks);
+        const response = JSON.parse(body.toString());
+        res.end(replaceForecast(response));
       });
     })
     .end();
@@ -80,32 +113,3 @@ exports.getSearch = (req, res) => {
 exports.redirect = (_, res) => {
   res.redirect('/location');
 };
-
-// const http = require("https");
-
-// const options = {
-// 	"method": "GET",
-// 	"hostname": "weatherapi-com.p.rapidapi.com",
-// 	"port": null,
-// 	"path": "/forecast.json?q=London&days=3",
-// 	"headers": {
-// 		"X-RapidAPI-Key": "6d82f956bamsh079341077b9577ep15f139jsnb77afa8ba2cf",
-// 		"X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
-// 		"useQueryString": true
-// 	}
-// };
-
-// const req = http.request(options, function (res) {
-// 	const chunks = [];
-
-// 	res.on("data", function (chunk) {
-// 		chunks.push(chunk);
-// 	});
-
-// 	res.on("end", function () {
-// 		const body = Buffer.concat(chunks);
-// 		console.log(body.toString());
-// 	});
-// });
-
-// req.end();
