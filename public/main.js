@@ -6,7 +6,7 @@ const errorMsg = document.querySelector('.error_msg');
 const form = document.querySelector('.form');
 
 //Forecast Card
-const info = document.querySelectorAll('.info');
+const date = document.querySelectorAll('.date');
 const forecastCards = document.querySelectorAll('.card');
 
 form?.addEventListener('submit', function (e) {
@@ -25,20 +25,22 @@ form?.addEventListener('submit', function (e) {
 });
 
 //Forecast Cards
-info.forEach((el, ind) => {
+date.forEach((el, ind) => {
   if (ind === 0) {
-    el.children[0].textContent = 'Today';
+    el.textContent = 'Today';
   } else if (ind === 1) {
-    el.children[0].textContent = 'Tomorrow';
+    el.textContent = 'Tomorrow';
   } else {
-    el.children[0].textContent = Intl.DateTimeFormat('en-GB', {
+    el.textContent = Intl.DateTimeFormat('en-GB', {
       weekday: 'long',
-    }).format(new Date(el.children[0].textContent));
+    }).format(new Date(el.textContent));
   }
 });
 
-forecastCards[1].style.transform = 'scale(0.9)';
-forecastCards[2].style.transform = 'scale(0.9)';
+if (forecastCards.length > 1) {
+  forecastCards[1].style.transform = 'scale(0.9)';
+  forecastCards[2].style.transform = 'scale(0.9)';
+}
 
 document.addEventListener('click', function (e) {
   if (e.target.closest('.card')) {
@@ -46,3 +48,10 @@ document.addEventListener('click', function (e) {
     e.target.closest('.card').style.transform = 'scale(1)';
   }
 });
+
+document
+  .querySelector('.forecast_icon')
+  .children[0].setAttribute(
+    'href',
+    `forecast?q=${window.location.href.split('=')[1]}`
+  );

@@ -199,8 +199,12 @@ span span {
 
 .forecast_icon {
   font-size: 25px;
-  color: white;
   text-align: right;
+}
+
+.forecast_icon a {
+  color: white;
+  text-decoration: none;
 }
 
 .forecast_icon i:hover {

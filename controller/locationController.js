@@ -4,44 +4,45 @@ const replaceForecast = require('../modules/replaceForecast');
 const dotenv = require('dotenv').config({ path: './config.env' });
 
 //Check URL and create req param for location
-exports.checkURL = (req, _, next) => {
-  req.location = req.url.split('/')[2];
-  next();
-};
+// exports.checkURL = (req, _, next) => {
+//   console.log(req.query.q);
+//   req.location = req.query.q;
+//   next();
+// };
 
 //Check Post through search bar and create req param for location
-exports.checkPost = (req, _, next) => {
-  req.location = req.body.location;
-  next();
-};
+// exports.checkPost = (req, _, next) => {
+//   req.location = req.body.location;
+//   next();
+// };
 
 //no location passed through URL, default to user IP location
-exports.getDefault = (_, res) => {
-  const options = {
-    method: 'GET',
-    hostname: 'weatherapi-com.p.rapidapi.com',
-    port: null,
-    path: `/current.json?q='Birmingham'`,
-    headers: {
-      'X-RapidAPI-Key': process.env.API_KEY,
-      'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-      useQueryString: true,
-    },
-  };
-  http
-    .request(options, (resp) => {
-      const chunks = [];
-      resp.on('data', function (chunk) {
-        chunks.push(chunk);
-      });
-      resp.on('end', function () {
-        const body = Buffer.concat(chunks);
-        const response = JSON.parse(body.toString());
-        res.end(replaceWeatherCard(response));
-      });
-    })
-    .end();
-};
+// exports.getDefault = (_, res) => {
+//   const options = {
+//     method: 'GET',
+//     hostname: 'weatherapi-com.p.rapidapi.com',
+//     port: null,
+//     path: `/current.json?q='Birmingham'`,
+//     headers: {
+//       'X-RapidAPI-Key': process.env.API_KEY,
+//       'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
+//       useQueryString: true,
+//     },
+//   };
+//   http
+//     .request(options, (resp) => {
+//       const chunks = [];
+//       resp.on('data', function (chunk) {
+//         chunks.push(chunk);
+//       });
+//       resp.on('end', function () {
+//         const body = Buffer.concat(chunks);
+//         const response = JSON.parse(body.toString());
+//         res.end(replaceWeatherCard(response));
+//       });
+//     })
+//     .end();
+// };
 
 //location passed through search bar or directly into URL
 exports.getSearch = (req, res) => {
@@ -49,7 +50,7 @@ exports.getSearch = (req, res) => {
     method: 'GET',
     hostname: 'weatherapi-com.p.rapidapi.com',
     port: null,
-    path: `/current.json?q=${req.location}`,
+    path: `/current.json?q=${req.query.q}`,
     headers: {
       'X-RapidAPI-Key': process.env.API_KEY,
       'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
@@ -85,7 +86,7 @@ exports.getForecast = (req, res) => {
     method: 'GET',
     hostname: 'weatherapi-com.p.rapidapi.com',
     port: null,
-    path: '/forecast.json?q=London&days=3',
+    path: `/forecast.json?q=${req.query.q}&days=3`,
     headers: {
       'X-RapidAPI-Key': '6d82f956bamsh079341077b9577ep15f139jsnb77afa8ba2cf',
       'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
@@ -111,5 +112,5 @@ exports.getForecast = (req, res) => {
 };
 
 exports.redirect = (_, res) => {
-  res.redirect('/location');
+  res.redirect('/location?q=birmingham');
 };

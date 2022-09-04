@@ -17,8 +17,6 @@ module.exports = (data) => {
     undefined: '',
   };
 
-  console.log(data.current.condition.text);
-
   let output = weatherCard.replace(/%COUNTRY_NAME%/g, data.location.country);
   output = output.replace(/%CITY_NAME%/g, data.location.name);
   output = output.replace(/%CONDITION%/g, data.current.condition.text);
