@@ -30,6 +30,8 @@ module.exports = (data) => {
     }`
   );
   output = output.replace(/%PRECIP%/g, data.current.precip_mm);
+  output = output.replace(/%FEELSLIKE%/g, data.current.feelslike_c);
+  output = output.replace(/%HUMID%/g, data.current.humidity);
   output = output.replace(/%IMG_SRC%/g, data.current.condition.icon);
   output = output.replace(/%TEMPERATURE%/g, Math.round(data.current.temp_c));
 

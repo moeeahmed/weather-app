@@ -67,6 +67,7 @@ exports.getSearch = (req, res) => {
       resp.on('end', function () {
         const body = Buffer.concat(chunks);
         const response = JSON.parse(body.toString());
+        console.log(response);
         if (response.hasOwnProperty('error')) {
           res.status(400).json({
             results: 'error',
