@@ -16,7 +16,7 @@ body {
   flex-direction: row;
   margin: 0 auto;
   justify-content: center;
-  padding: 50px;
+  padding: 25px;
   overflow-x: scroll;
 }
 
@@ -31,7 +31,12 @@ body {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.74);
-  -webkit-animation: open 2s cubic-bezier(0.39, 0, 0.38, 1);
+  transform: scale(0.9);
+  -webkit-animation: open 2s cubic-bezier(0.39, 0, 0.38, 1) 1;
+}
+
+.active {
+  transform: scale(1);
 }
 
 .error_msg {
@@ -63,6 +68,7 @@ body {
   width: 75px;
   margin-inline: 5px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .hourly_card p {
@@ -201,7 +207,9 @@ span span {
 
 .forecast_icon {
   font-size: 25px;
-  text-align: right;
+  text-align: center;
+  padding-top: 10px;
+  -webkit-animation: up 2s cubic-bezier(0.39, 0, 0.38, 1) 0.2s;
 }
 
 .forecast_icon a {

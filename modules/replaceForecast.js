@@ -45,7 +45,7 @@ module.exports = (data) => {
     output2 = output2.replace(
       /%TEMP%/g,
       i === 0
-        ? data.current.temp_c
+        ? Math.floor(data.current.temp_c)
         : Math.floor(data.forecast.forecastday[i].day.avgtemp_c)
     );
     output2 = output2.replace(
