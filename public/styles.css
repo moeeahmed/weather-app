@@ -39,6 +39,11 @@ body {
   transform: scale(1);
 }
 
+.condition {
+  font-size: 25px;
+  font-weight: 600;
+}
+
 .error_msg {
   font-weight: 600;
   color: firebrick;
