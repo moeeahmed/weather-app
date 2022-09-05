@@ -56,11 +56,11 @@ const getHourForecast = function () {
   const hour = new Date().getHours();
   const hourElement = document.querySelector('.hourly').children[hour];
 
-  document
-    .querySelectorAll('.hourly')
-    .forEach((el) => (el.style.background = 'none'));
+  // document
+  //   .querySelectorAll('.hourly')
+  //   .forEach((el) => (el.style.background = 'none'));
 
-  hourElement.style.background = 'rgba(255, 255, 255, 0.2)';
+  // hourElement.style.background = 'rgba(255, 255, 255, 0.2)';
 
   hourElement.scrollIntoView(true, {
     behavior: 'auto',
