@@ -1,28 +1,33 @@
-const http = require('https');
 const getWeatherData = require('./getWeatherData');
 const replaceWeatherCard = require('../modules/replaceWeatherCard');
 const replaceForecast = require('../modules/replaceForecast');
-const { resolvePtr } = require('dns');
 
 exports.getSearch = async (req, res) => {
-  console.log(req.query);
-  const response = await getWeatherData.getJSON(
+  const resp = await getWeatherData.getJSON(
     req,
     'https://weatherapi-com.p.rapidapi.com/current.json'
   );
 
-  res.send(replaceWeatherCard(response));
+  res
+    .status(resp.status)
+    .send(
+      resp.status === 200 ? replaceWeatherCard(resp.data) : resp.error.message
+    );
 };
 
 //get 3 day forecastg
 exports.getForecast = async (req, res) => {
   req.query.days = '3';
-  const response = await getWeatherData.getJSON(
+  const resp = await getWeatherData.getJSON(
     req,
     'https://weatherapi-com.p.rapidapi.com/forecast.json'
   );
 
-  res.send(replaceForecast(response));
+  res
+    .status(resp.status)
+    .send(
+      resp.status === 200 ? replaceForecast(resp.data) : resp.error.message
+    );
 };
 
 exports.redirect = (_, res) => {

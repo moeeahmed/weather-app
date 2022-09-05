@@ -15,10 +15,16 @@ exports.getJSON = (req, url) => {
 
   return axios
     .request(options)
-    .then(function (response) {
-      return response.data;
+    .then((resp) => {
+      return {
+        status: resp.status,
+        data: resp.data,
+      };
     })
-    .catch(function (error) {
-      return error;
+    .catch((err) => {
+      return {
+        status: err.response.status,
+        error: err.response.data.error,
+      };
     });
 };
