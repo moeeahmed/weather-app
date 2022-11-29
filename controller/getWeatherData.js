@@ -1,5 +1,4 @@
 const axios = require('axios');
-const dotenv = require('dotenv').config({ path: './config.env' });
 
 let options = {
   method: 'GET',

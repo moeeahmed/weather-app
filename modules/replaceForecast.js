@@ -19,7 +19,6 @@ let c = [];
 let output1 = forecastTemplate;
 
 module.exports = (data) => {
-  console.log(data);
   output1 = output1.replace(/%COUNTRY_NAME%/g, data.location.country);
   output1 = output1.replace(/%CITY_NAME%/g, data.location.name);
 
