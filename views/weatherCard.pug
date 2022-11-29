@@ -1,0 +1,36 @@
+extends base
+
+block content
+    .location
+        h2 #{data.location.country}
+        h4 #{data.location.name}
+    .forecast_icon
+        a(href='/forecast')
+            i.fa-regular.fa-calendar-days
+    .container
+        .card.active(style='margin: 0 auto')
+            .info
+                h3.condition #{data.current.condition.text}
+                h3
+                    | Wind: 
+                    -var direction = {N: '↑',NE: '↗',E: '→',SE: '↘',S: '↓',SW: '↙',W: '←',NW: '↖'};
+                    span #{data.current.wind_mph} mph #{direction[data.current.wind_dir] === undefined ? '' : direction[data.current.wind_dir]}
+                h3
+                    | Precip: 
+                    span #{data.current.precip_mm}mm
+                h3
+                    | Feels like
+                    span #{data.current.feelslike_c}&#8451
+                h3
+                    | Humidity: 
+                    span #{data.current.humidity}%
+            .temperature
+                .img
+                    img(src=`${data.current.condition.icon}`)
+                h1
+                    | #{Math.round(data.current.temp_c)}
+                    span.unit &#8451
+            .error_msg.hide
+                | %ERROR_MESSAGE%
+            form.form(action='/location' method='get')
+                input.location_input(name='q' type='text' placeholder='Enter location 🔍')

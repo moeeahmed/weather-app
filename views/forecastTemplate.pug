@@ -1,0 +1,45 @@
+extends base
+
+
+mixin hourlyCards(data)
+    .hourly_card
+        p #{data.time.split(' ')[1]}
+        img(src="%ICON%")
+        p %TEMP%&#8451
+
+
+mixin forecastCards(data)
+    .card
+    .info
+        h3.date %DATE%
+        h3.condition %CONDITION%
+        h3 %WIND_SPEED% mph
+        h3
+        | Chance of Rain: 
+        span %COR%%
+    .temperature
+        .img
+        img(src='%ICON%')
+        h1
+        | %TEMP%
+        span.unit &#x2103;
+        .max_min
+        h3
+            | Min: %MINTEMP%
+            span.unit &#x2103;
+        h3
+            | Max: %MAXTEMP%
+            span.unit &#x2103;
+    .hourly
+        +hourlyCards(data)
+
+
+block content
+    .location
+        h2 %COUNTRY_NAME%
+        h4 %CITY_NAME%
+    .forecast_icon
+        a(href='/location')
+            i.fa-solid.fa-magnifying-glass
+    .container
+        +forecastCards(data)
