@@ -6,6 +6,8 @@ exports.getSearch = async (req, res) => {
     'https://weatherapi-com.p.rapidapi.com/current.json'
   );
 
+  console.log(resp);
+
   res.status(200).render('weatherCard', resp);
 };
 
