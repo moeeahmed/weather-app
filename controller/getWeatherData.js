@@ -1,15 +1,14 @@
 const axios = require('axios');
 
-let options = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': process.env.API_KEY,
-    'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-  },
-};
-
-exports.getJSON = (req, url) => {
-  options.params = req.query;
+exports.getJSON = (query, url) => {
+  let options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': process.env.API_KEY,
+      'X-RapidAPI-Host': process.env.API_HOST,
+    },
+  };
+  options.params = query;
   options.url = url;
 
   return axios
