@@ -28,6 +28,7 @@
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
     "process": "^0.11.10",
+    "pug": "^3.0.2",
     "start": "^5.1.0"
   },
   "devDependencies": {
