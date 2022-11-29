@@ -1,0 +1,47 @@
+extends base
+
+
+mixin hourlyCards(data)
+    .hourly_card
+        p #{data.time.split(' ')[1]}
+        img(src=`${data.condition.icon}`)
+        p #{data.temp_c}&#8451
+
+
+mixin forecastCards(data)
+    .card
+        .info
+            h3.date #{data.date}
+            h3.condition #{data.day.condition.text}
+            h3 Max Wind: #{data.day.maxwind_mph} mph
+            h3
+                | Chance of Rain: 
+                span #{data.day.daily_chance_of_rain}%
+        .temperature
+            .img
+                img(src=`${data.day.condition.icon}`)
+            h1
+                | #{ Math.floor(data.day.avgtemp_c)}
+                span.unit &#x2103;
+            .max_min
+                h3
+                    | Min: #{data.day.mintemp_c}
+                    span.unit &#x2103;
+                h3
+                    | Max: #{data.day.maxtemp_c}
+                    span.unit &#x2103;
+        .hourly
+            each hour in data.hour
+                +hourlyCards(hour)
+
+
+block content
+    .location
+        h2 #{data.location.country}
+        h4 #{data.location.name}
+    .forecast_icon
+        a(href='/location')
+            i.fa-solid.fa-magnifying-glass
+    .container
+        each forecast in data.forecast.forecastday
+            +forecastCards(forecast)
